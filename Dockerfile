@@ -31,8 +31,8 @@ USER node
 WORKDIR /home/node/app
 
 # Default env vars
-ENV NODE_ENV=production
-ENV PORT=5010
+ENV NODE_ENV=sit
+ENV PORT=5001
 
 ## Based on https://medium.com/@amirilovic/how-to-fix-node-dns-issues-5d4ec2e12e95
 # ENV UV_THREADPOOL_SIZE=64

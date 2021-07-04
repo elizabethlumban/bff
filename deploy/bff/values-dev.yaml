@@ -9,7 +9,7 @@ image:
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: "nicco-wallet-api"
+fullnameOverride: "dev"
 
 service:
   type: ClusterIP
@@ -39,9 +39,9 @@ env:
         key: binding
 
 config:
-  PORT: 3000
-  NODE_ENV: development
-  APPLICATION_ENVIRONMENT: development
+  PORT: 5001
+  NODE_ENV: sit
+  APPLICATION_ENVIRONMENT: production
 
 # Additional secrets
 # The pipeline will use envsubst, so we can use env vars here

@@ -147,7 +147,6 @@ const uriFromVCAP = () => {
 
 
 export const getConnectionURL = () => {
-  console.log("isDev", isDev);
   //return isDev() ? "mongodb://localhost/testdb" : uriFromVCAP();
   return isDev() ? "mongodb://localhost/testdb" : getConnectionURI();
 };
