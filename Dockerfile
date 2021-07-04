@@ -18,8 +18,7 @@ RUN yarn install --ignore-engines
 COPY . .
 
 # Compile and optimise dependencies (removed --production from yarn install for tslib error)
-RUN npm run build \
-    && modclean -r
+RUN npm run build
 
 # Prepare the bundle folder
 RUN sh ./bundle.sh
