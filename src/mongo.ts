@@ -92,19 +92,20 @@ function getConnectionOptions() {
 }
  */
 const getMongoDeployment = (options = undefined) => {
-  const appenv = require("cfenv").getAppEnv(options);
-  const { services } = appenv;
-  const cfMongodbServices = services["databases-for-mongodb"];
+  //const appenv = require("cfenv").getAppEnv(options);
+  //const { services } = appenv;
+  //const cfMongodbServices = services["databases-for-mongodb"];
   let mongodbConn;
   // test Cloud Foundary Environment
-  if (cfMongodbServices) {
-    mongodbConn = cfMongodbServices[0].credentials.connection.mongodb;
-  }
+  //if (cfMongodbServices) {
+  //  mongodbConn = cfMongodbServices[0].credentials.connection.mongodb;
+ // }
   // try K8 environment binding
-  if (!mongodbConn && process.env.MONGO_BINDING) {
+  if ( process.env.MONGO_BINDING) {
     const binding = JSON.parse(process.env.MONGO_BINDING);
     mongodbConn = binding.connection.mongodb;
   }
+  
   return mongodbConn;
 }
 
