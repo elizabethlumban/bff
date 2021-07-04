@@ -76,7 +76,7 @@
         "typescript": "^3.8.3"
     },
     "engines": {
-        "node": "12.x.x"
+        "node": "14.x.x"
     },
     "jestSonar": {
         "reportPath": "coverage",
