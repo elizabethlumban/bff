@@ -1,0 +1,98 @@
+# Default values for chart - use this for values that are prone to change, especially between environments.
+# This is a YAML-formatted file.
+
+replicaCount: 1
+nspace: dev
+image:
+  repository: au.icr.io/eol1/bff
+  tag: "1.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "bff"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetport: 3000
+
+ingress:
+  enabled: true
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: public-iks-k8s-nginx
+  hosts:
+    - host: dev.eol-iks-cp4a-ddd93d3a0fef01f6b396b69d343df410-0000.au-syd.containers.appdomain.cloud
+      paths: [/]
+  tls:
+    - secretName: eol-iks-cp4a-ddd93d3a0fef01f6b396b69d343df410-0000
+      hosts:
+        - dev.eol-iks-cp4a-ddd93d3a0fef01f6b396b69d343df410-0000.au-syd.containers.appdomain.cloud
+
+# Add to env in the deployment (used to bring the secret for bound services)
+env:
+  - name: MONGO_BINDING
+    valueFrom:
+      secretKeyRef:
+        name: binding-mongo-dev
+        key: binding
+
+config:
+  PORT: 5000
+  NODE_ENV: dev
+  APPLICATION_ENVIRONMENT: development
+ 
+
+# Additional secrets
+# The pipeline will use envsubst, so we can use env vars here
+secret:
+  #APIC_SECRET: ${APIC_SECRET}
+
+# hpa
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
