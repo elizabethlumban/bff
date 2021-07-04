@@ -8,8 +8,7 @@ WORKDIR /app
 RUN yarn global add modclean@2.0.0
 
 # Copy only the dependency definitions
-COPY package.json  ./
-
+COPY package.json ./
 # Only re-install if package.json or yarn.lock change
 # We also need dev dependencies for "gulp compile" to work
 RUN yarn install --ignore-engines
